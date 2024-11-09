@@ -1,3 +1,3 @@
-# UDP-Socket-Hello-World
+# UDP-File-Trasnfer
 
-Bare bones UDP socket based on http://gafferongames.com/networking-for-game-programmers/sending-and-receiving-packets/
+Simple UDP file transfer application for the subject about Computer Networks, initial commit based on https://github.com/haydenjameslee/UDP-Socket-Hello-World
