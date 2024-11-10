@@ -1,6 +1,8 @@
 #ifndef ADDRESS_H
 #define ADDRESS_H
 
+#include <string>
+
 class Address
 {
 public:
@@ -15,6 +17,7 @@ public:
              unsigned short port );
     unsigned int GetAddress() const;
     unsigned short GetPort() const;
+    std::string GetAddressString() const;
 
     // unsigned char GetA() const;
     // unsigned char GetB() const;

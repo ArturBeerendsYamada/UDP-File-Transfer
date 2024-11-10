@@ -99,7 +99,7 @@ int main(int argc, char** argv)
 
     if (sending)
     {
-        SendPacket(data.c_str(), sizeof(data));
+        SendPacket(data.c_str(), data.length());
         printf( "Sent data: %s\n", data.c_str() );
     }
     else
