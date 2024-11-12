@@ -4,6 +4,7 @@
 #include <openssl/md5.h>
 #include "Socket.h"
 #include "Address.h"
+#include "SHA256.h" //from https://github.com/System-Glitch/SHA256
 
 using namespace std;
 
@@ -77,14 +78,16 @@ void sendDataResponse(Address sender, string filename, int chunk_start, int chun
     string message =    "file:" + filename + 
                         "start:" + to_string(chunk_start) +
                         "end:" + to_string(chunk_end) +
-                        "checksum:";
+                        "sha256:";
     ifstream input(filename, ios::binary);
     char* file_data = new char[chunk_end-chunk_start];
     input.seekg(chunk_start);
     input.read(file_data, chunk_end-chunk_start);
-    string checksum = "TODO";
+    SHA256 sha256;
+    sha256.update(reinterpret_cast<unsigned char*>(file_data), (chunk_end-chunk_start));
+    string error_detection = sha256.toString(sha256.digest());
     string str(file_data, chunk_end-chunk_start);
-    message += (checksum + "data:" + str);
+    message += (error_detection + "data:" + str);
     sock.Send(sender, message.c_str(), message.length());
     //cout << "file data sent\n";
 }
